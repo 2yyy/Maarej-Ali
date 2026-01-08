@@ -7,15 +7,15 @@
 
     <style>
         :root {
-            --primary-brown: #5d4037;
-            --dark-brown: #3e2723;
+            --primary-brown: #f1f1f1;
+            --dark-brown: #030303;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, sans-serif;
 
             /* 🔹 خلفية الموقع صورة */
-            background-image: url("background.jpg"); /* غير اسم الصورة */
+            background-image: url("background.jpg"); /* غيّرها */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -29,66 +29,48 @@
         }
 
         .card {
-            background: white;
+            background: rgb(197, 164, 17);
             width: 100%;
             max-width: 380px;
             border-radius: 25px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.25);
             overflow: hidden;
-            border: 2px solid #d7ccc8;
+            border: 2px solid #000000;
         }
 
         .header {
-    background: var(--primary-brown);
-    color: white;
-    text-align: center;
-    padding: 25px 20px 65px; /* زودنا المساحة تحت */
-    position: relative;
-}
-
-        /* 🔹 مكان الشعار */
-        .logo {
-    width: 90px;
-    height: 90px;
-    background: white;
-    border-radius: 50%;
-    padding: 0;              /* نحذف الحشو */
-    overflow: hidden;        /* 🔹 المهم */
-    position: absolute;
-    bottom: -45px;
-    left: 50%;
-    transform: translateX(-50%);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.25);
-}
-
-
-.logo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;   /* 🔹 يملي الدائرة بدون تشويه */
-    border-radius: 50%;  /* أمان إضافي */
-}
-
-
-.header h2,
-.header p {
-    position: relative;
-    z-index: 2;
-}
-
-
-        .header p { 
-            margin: 0; 
-            font-size: 14px; 
-            opacity: 0.9; 
+            background: var(--primary-brown);
+            color: rgb(197, 164, 17);
+            text-align: center;
+            padding: 30px 20px 25px;
         }
 
-        .content { 
-            padding: 60px 25px 25px; 
+        /* 🔹 الشعار بدون دائرة */
+        .logo {
+            display: block;
+            margin: 0 auto 10px;
+            max-width: 180px;
+            max-height: auto;
+            object-fit: contain;
+        }
+
+        .header p {
+            margin: 0;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .header h2 {
+            margin: 5px 0 0;
+            font-size: 22px;
+        }
+
+        .content {
+            padding: 25px;
         }
 
         .info-box {
-            background: #fafafa;
+            background: #f1f1f1;
             border-radius: 15px;
             padding: 15px;
             margin-bottom: 20px;
@@ -97,7 +79,7 @@
 
         .label {
             font-size: 12px;
-            color: #795548;
+            color: #c5ad23;
             font-weight: bold;
         }
 
@@ -111,7 +93,7 @@
 
         .discounts {
             background: #fff3e0;
-            border: 1px dashed #e64a19;
+            border: 1px dashed #000000;
             border-radius: 15px;
             padding: 15px;
         }
@@ -119,7 +101,7 @@
         .discounts h3 {
             margin: 0 0 10px;
             font-size: 16px;
-            color: #e64a19;
+            color: #000000;
             text-align: center;
         }
 
@@ -135,7 +117,7 @@
             text-align: center;
             padding: 15px;
             font-size: 11px;
-            color: #9e9e9e;
+            color: #030303;
         }
     </style>
 </head>
@@ -144,18 +126,16 @@
 <div class="card">
 
     <div class="header">
-        <p id="prog-name">برنامج العضوية</p>
-        <h2>بطاقة خصم ذكية</h2>
+        <!-- 🔹 الشعار -->
+        <img src="logo.png" alt="الشعار" class="logo">
 
-        <!-- 🔹 صورة الشعار -->
-        <div class="logo">
-            <img src="logo.png" alt="شعار">
-        </div>
+        <p id="prog-name">برنامج معارج</p>
+        <h2>بطاقة عضوية</h2>
     </div>
 
     <div class="content">
         <div class="info-box">
-            <span class="label">اسم الطالب</span>
+            <span class="label">اسم العضو</span>
             <span class="value" id="student-name">جاري التحميل...</span>
         </div>
 
@@ -167,10 +147,9 @@
         <div class="discounts">
             <h3>المحلات والخصومات المتاحة</h3>
             <ul>
-                <li><strong>مقهى النخبة:</strong> خصم 20%</li>
-                <li><strong>مكتبة البيان:</strong> خصم 15%</li>
-                <li><strong>مطعم ورد:</strong> وجبة مجانية</li>
-                <li><strong>وقت اللياقة:</strong> خصم 10%</li>
+                <li><strong>فلق للقهوة المختصة:</strong> خصم 20%</li>
+                <li><strong>سفن سويت:</strong> خصم 15%</li>
+                <li><strong>مستر فريش:</strong> خصم 20%</li>
             </ul>
         </div>
     </div>
@@ -190,12 +169,10 @@
     document.getElementById('student-id').innerText =
         "#" + (params.get('id') || "000000");
 
-    if(params.get('prog')) {
+    if (params.get('prog')) {
         document.getElementById('prog-name').innerText = params.get('prog');
     }
 </script>
 
 </body>
 </html>
-
-
