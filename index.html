@@ -173,5 +173,86 @@
     }
 </script>
 
+<script>
+const shops = [
+  {
+    name: "فلق للقهوة المختصة",
+    lat: 31.337450321105802,
+    lng: 37.33011132020087,
+    radius: 80
+  },
+  {
+    name: "سفن سويت",
+    lat: 31.314144466663613,
+    lng: 37.34524649767061,
+    radius: 80
+  },
+  {
+    name: "مستر فريش",
+    lat: 31.33780173839487,
+    lng: 37.335150528134996,
+    radius: 80
+  },
+  {
+    name: "البيت",
+    lat: 31.390226675012336,
+    lng: 37.29219003815185,
+    radius: 100
+  }
+];
+</script>
+
+<script>
+function distance(lat1, lon1, lat2, lon2) {
+  const R = 6371e3;
+  const φ1 = lat1 * Math.PI / 180;
+  const φ2 = lat2 * Math.PI / 180;
+  const Δφ = (lat2 - lat1) * Math.PI / 180;
+  const Δλ = (lon2 - lon1) * Math.PI / 180;
+
+  const a =
+    Math.sin(Δφ / 2) ** 2 +
+    Math.cos(φ1) * Math.cos(φ2) *
+    Math.sin(Δλ / 2) ** 2;
+
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+</script>
+
+<script>
+window.onload = () => {
+  navigator.geolocation.getCurrentPosition(
+    pos => detectShop(pos.coords.latitude, pos.coords.longitude),
+    () => console.log("لم يتم السماح بالموقع")
+  );
+};
+
+function detectShop(lat, lng) {
+  for (const shop of shops) {
+    const d = distance(lat, lng, shop.lat, shop.lng);
+    if (d <= shop.radius) {
+      registerVisit(shop.name);
+      break;
+    }
+  }
+}
+</script>
+
+<script>
+function registerVisit(shopName) {
+  const params = new URLSearchParams(window.location.search);
+
+  fetch("https://script.google.com/macros/s/AKfycby3tLs86mvAqSF6AfTJmEeizmk2FaW3mLexjebxyvxuT9o5BreKJOFGMsyLAGuXg4dT/exec", {
+    method: "POST",
+    body: JSON.stringify({
+      name: params.get("name"),
+      id: params.get("id"),
+      shop: shopName
+    })
+  });
+}
+</script>
+
+
 </body>
 </html>
